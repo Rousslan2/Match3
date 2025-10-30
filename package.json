@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "serve web -p $PORT -l $PORT"
+    "start": "sh -c 'if [ -f web/index.html ]; then serve web -p \"${PORT:-8080}\" -l \"${PORT:-8080}\"; else echo \"Warning: web/index.html not found, serving repo root\"; serve . -p \"${PORT:-8080}\" -l \"${PORT:-8080}\"; fi'"
   },
   "dependencies": {
     "serve": "14.2.0"
