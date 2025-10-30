@@ -2,12 +2,14 @@
 set -e
 
 # If a 'web' folder exists (GDevelop Web export), serve it; otherwise serve current dir.
+SERVE_DIR="."
 if [ -d "web" ]; then
-  cd web
+  SERVE_DIR="web"
 fi
 
-if [ ! -f "index.html" ]; then
-  echo "Warning: index.html not found. Did you export the game to the 'web/' folder?"
+if [ ! -f "$SERVE_DIR/index.html" ]; then
+  echo "Warning: index.html not found in $SERVE_DIR. Did you export the game to the 'web/' folder?"
 fi
 
-python -m http.server "${PORT:-8080}"
+# Use npx serve (Node.js) which is available on Railway
+npx -y serve "$SERVE_DIR" -p "${PORT:-8080}" -l "${PORT:-8080}"
